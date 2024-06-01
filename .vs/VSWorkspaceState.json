@@ -6,6 +6,6 @@
     "\\Migrations",
     "\\Model"
   ],
-  "SelectedNode": "\\Client\\ObservationsClient.cs",
+  "SelectedNode": "\\Controllers\\RecentObservationsInfoController.cs",
   "PreviewInSolutionExplorer": false
 }
