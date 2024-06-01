@@ -24,7 +24,7 @@ namespace apiweb.Controllers
         public async Task<ActionResult<string>> RandomPhotoOfBird()
         {
             PhotoClient photoclient = new PhotoClient();
-            string response = photoclient.GetRandomPhoto().Result;
+            string response = photoclient.GetRandomBirdPhoto().Result;
             return response;
             
         }

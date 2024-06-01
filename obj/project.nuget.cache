@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8WTdZdEJsLx/VKLXp3xgXttOVjY/LMA6zC8nJjnz4LBwB9IfLX3o6gQYj+eHhcNTwlOvxatkizQfOGTuWfZZ4A==",
+  "dgSpecHash": "Ffe3CJQfKuinip4GSeWGYJyY7DY3KnxpGiVrT0yff0bEK4ZiV+VkumRazQc7axwrMMt0lYmkfEwWZPy522YXdQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sarab\\Desktop\\GitProgram\\WebApi\\WebApi.csproj",
+  "projectFilePath": "C:\\Users\\sarab\\Desktop\\TgBotandApi\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sarab\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\sarab\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
