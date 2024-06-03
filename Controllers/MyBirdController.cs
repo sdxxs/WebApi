@@ -19,8 +19,19 @@ namespace apiweb.Controllers
             _appContext = AppContext;
         }
 
+
         [HttpGet]
-        [ActionName("RandomPhotoOfBird")]
+        [ActionName("GetPhoto")]
+        public async Task<ActionResult<string>> GetPhoto(string query)
+        {
+            PhotoClient photoclient = new PhotoClient();
+            string response = photoclient.GetPhoto(query).Result;
+            return response;
+
+        }
+
+        [HttpGet]
+        [ActionName("GetRandomPhotoOfBird")]
         public async Task<ActionResult<string>> RandomPhotoOfBird()
         {
             PhotoClient photoclient = new PhotoClient();
@@ -30,7 +41,7 @@ namespace apiweb.Controllers
         }
 
         [HttpGet]
-        [ActionName("ObservByRegionCode")]
+        [ActionName("GetObservByRegionCode")]
         public async Task<ActionResult<string>> ListforaRegionCode(string regionCode)
         {
             ObservationsClient birdClient = new ObservationsClient();
@@ -73,7 +84,7 @@ namespace apiweb.Controllers
 
         [HttpPost]
         [ActionName("PostMyObserv")]
-        public async Task<string> PostObserv(long PersonChatId, string sciName, string locName, string obsDt, int howMany)
+        public async Task<string> PostObserv(long PersonChatId, string sciName, string locName, string obsDt, string howMany)
         {
             try
             {
@@ -84,7 +95,7 @@ namespace apiweb.Controllers
             }
             catch (Exception ex)
             {
-                return "`Помилка при запиті, перевірте корректність запису команди (ви ввели цифру на місці кількості?)`";
+                return "error";          
             }
         }
 
@@ -105,7 +116,7 @@ namespace apiweb.Controllers
             }
             catch (Exception ex)
             {
-                return "`Помилка при запиті, перевірте корректність запису команди (Введіть іd існуючого елемента, який бажаєте видалити на місці ID в команді)`";
+                return "error";
             }
         }
     }

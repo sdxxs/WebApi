@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Azure;
+using System.Net;
 using Unsplasharp;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -15,6 +16,21 @@ namespace WebApi.Client
             var photo =await client.GetRandomPhoto(count:1,query: "bird");
             var url=photo.First().Urls.Regular;
             return url;
+        }
+        public async Task<string> GetPhoto(string text)
+        {
+            try
+            {
+                UnsplasharpClient client = new UnsplasharpClient(ApiKey);
+                var photo = await client.GetRandomPhoto(count: 1, query: text);
+                var url = photo.First().Urls.Regular;
+                return url;
+            }
+            catch (Exception ex)
+            {
+                return "error";                 
+            }
+            
         }
     }
 }

@@ -31,8 +31,8 @@ namespace apiweb.Client
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    return "Щось пішло не так...Ви допустили помилку в записі команди, або такого регіону не занесено до доступної нам бази даних." +
-                 "\n Спробуйте ще раз (p.s приклад команди для корректного пошуку спостережень в Києвській обсласті: /observUA-30)";
+                    return "error";
+                    
                 }
 
                 var body = await response.Content.ReadAsStringAsync();
@@ -45,59 +45,12 @@ namespace apiweb.Client
                 string ListOfObserv = "";
                 foreach (var responseItem in result)
                 {
-                    ListOfObserv = ListOfObserv + "\nНазва: " + responseItem.sciName + ".\nМiсце,в якому спостерігалось: " + responseItem.locName + "\nДата: " + responseItem.obsDt + "\nКількість: " + responseItem.howMany + "\n ";
+                    ListOfObserv = ListOfObserv + "\nНазва: " + responseItem.sciName + ".\nЗвичайна назва: " + responseItem.comName+ ".\nМiсце,в якому спостерігалось: " + responseItem.locName + "\nДата: " + responseItem.obsDt + "\nКількість: " + responseItem.howMany + "\n ";
 
                 }
                 return ListOfObserv;
             }
         }
-
-        public async Task<string> SpeciesListforaRegion(string RegionCode)
-        {
-            string path = $"https://api.ebird.org/v2/product/spplist/{RegionCode}";
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(path),//address            
-                Headers =
-                    {
-                       { "X-eBirdApiToken",ApiKey},
-                    },
-
-            };
-
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                return body.Replace(",", "\n");
-            }
-        }
-
-        public async Task<string> SpeciesInfoBySpeciesCode(string SpeciesCode)
-        {
-
-            string path = $"https://api.ebird.org/v2/ref/taxonomy/ebird?species=hottea1&version=2019";
-            var client = new HttpClient();
-            path = path.Replace("hottea1", SpeciesCode);
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(path),//address            
-                Headers =
-                    {
-                       { "X-eBirdApiToken",ApiKey},
-                    },
-
-            };
-
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                return body;
-            }
-        }
+   
     }
 }
