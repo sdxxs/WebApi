@@ -10,11 +10,9 @@ namespace apiweb.Client
     public class ObservationsClient
     {
         string ApiKey = "vj3fomr1fk96";
-
         public async Task<string> GetObservforaRegionCode(string regionCode)
         {
-
-            string path = $"https://api.ebird.org/v2/data/obs/{regionCode}/recent?back=1&maxResults=24";
+            string path = $"https://api.ebird.org/v2/data/obs/{regionCode}/recent?back=1&maxResults=10";
 
             var client = new HttpClient();
             var request = new HttpRequestMessage
@@ -25,7 +23,6 @@ namespace apiweb.Client
                 {
                     { "X-eBirdApiToken",ApiKey},
                 },
-
             };
             using (var response = await client.SendAsync(request))
             {
@@ -34,13 +31,11 @@ namespace apiweb.Client
                     return "error";
                     
                 }
-
                 var body = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<ObservationsInfo[]>(body);
-
                 if (result.Length == 0)
                 {
-                    return "Здається, в цьому регіоні не спостерігалось птахів сьогодні і вчора...";
+                    return "Здається, в цьому регіоні ніхто не спостерігав за птахами сьогодні і вчора...";
                 }
                 string ListOfObserv = "";
                 foreach (var responseItem in result)

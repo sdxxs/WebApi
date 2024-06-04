@@ -19,7 +19,6 @@ namespace apiweb.Controllers
             _appContext = AppContext;
         }
 
-
         [HttpGet]
         [ActionName("GetPhoto")]
         public async Task<ActionResult<string>> GetPhoto(string query)
@@ -60,7 +59,6 @@ namespace apiweb.Controllers
                 listofregion = $"{listofregion}\n{region.RegionName} — {region.RegionCode}";
             }
             return listofregion;
-
         }
 
         [HttpGet]
@@ -98,18 +96,13 @@ namespace apiweb.Controllers
                 return "error";          
             }
         }
-
         [HttpDelete]
         [ActionName("DeleteMyObserv")]
         public async Task<string> DeleteObserv(long PersonChatId, string id)
         {
             try
             {
-
                     int Id = Convert.ToInt32(id);
-
-               //  await _appContext.OwnListOfObservationsInfo.FromSql($"DELETE FROM dbo.OwnListOfObservationsInfo  where chatId ={PersonChatId} and id={Id};").ToListAsync();
-
                     await _appContext.OwnListOfObservationsInfo.Where(c => c.Id == Id & c.chatId == PersonChatId).ExecuteDeleteAsync();
                     await _appContext.SaveChangesAsync();
                     return "`Успішно видалено\\!`";              
